@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>C5 Active</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <img src="assets/c5-logo.png" alt="C5 Active Logo" class="logo" />
+
+    <p class="tagline">Connect. Commit. Change.</p>
+
+    <p class="subtitle">
+      C5 Active is a fitness platform built around habits, consistency,
+      and showing up together.
+    </p>
+
+    <a href="#signup" class="cta-btn">Join the Beta</a>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about">
+    <h2>What is C5 Active?</h2>
+    <p>
+      We believe fitness should be supportive, not intimidating.
+      C5 Active helps people build real habits by connecting with others
+      and committing together.
+    </p>
+  </section>
+
+  <!-- C5 PILLARS -->
+  <section class="pillars">
+    <h2>The C5 Method</h2>
+
+    <div class="pillar-grid">
+      <div class="pillar">
+        <h3>Connect</h3>
+        <p>Find people near you who want to stay active.</p>
+      </div>
+
+      <div class="pillar">
+        <h3>Commit</h3>
+        <p>Show up together and stay accountable.</p>
+      </div>
+
+      <div class="pillar">
+        <h3>Consistency</h3>
+        <p>Build habits that last.</p>
+      </div>
+
+      <div class="pillar">
+        <h3>Confidence</h3>
+        <p>Grow stronger with support.</p>
+      </div>
+
+      <div class="pillar">
+        <h3>Change</h3>
+        <p>See real, visible progress.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIGNUP -->
+  <section class="signup" id="signup">
+    <h2>Get Early Access</h2>
+    <p>Be notified when C5 Active launches.</p>
+
+    <form id="signup-form">
+      <input type="email" id="email" placeholder="Enter your email" required />
+      <button type="submit">Notify Me</button>
+    </form>
+
+    <p id="message"></p>
+  </section>
+
+  <footer>
+    © 2026 C5 Active
+  </footer>
+
+  <script>
+    const form = document.getElementById("signup-form");
+    const message = document.getElementById("message");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById("email").value;
+
+      try {
+        const res = await fetch("http://localhost:3000/signup", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email })
+        });
+
+        if (res.ok) {
+          message.textContent = "You're on the list!";
+          message.style.color = "#38bdf8";
+          form.reset();
+        } else {
+          message.textContent = "Something went wrong.";
+        }
+      } catch {
+        message.textContent = "Backend not running.";
+        message.style.color = "#f87171";
+      }
+    });
+  </script>
+
+</body>
+</html>
