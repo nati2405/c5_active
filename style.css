@@ -1,3 +1,6 @@
+/* ================================
+   C5 ACTIVE — GLOBAL RESET
+================================ */
 * {
   margin: 0;
   padding: 0;
@@ -5,30 +8,57 @@
   font-family: "Segoe UI", Tahoma, sans-serif;
 }
 
+/* ================================
+   BRAND VARIABLES
+================================ */
+:root {
+  --bg-dark: #020617;
+  --bg-mid: #0b1026;
+  --neon-blue: #38bdf8;
+  --neon-purple: #8b5cf6;
+  --neon-pink: #c084fc;
+  --text-main: #e5e7eb;
+  --text-muted: #94a3b8;
+}
+
+/* ================================
+   BODY + BACKGROUND MOTION
+================================ */
 body {
   min-height: 100vh;
   background:
-    radial-gradient(circle at top, rgba(99,102,241,0.2), transparent 60%),
-    linear-gradient(120deg, #020617, #0f172a);
-  color: #e5e7eb;
+    radial-gradient(circle at 20% 10%, rgba(139,92,246,0.25), transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(56,189,248,0.18), transparent 50%),
+    linear-gradient(120deg, var(--bg-dark), var(--bg-mid));
+  color: var(--text-main);
   overflow-x: hidden;
+  position: relative;
 }
 
-/* Motion streaks */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: repeating-linear-gradient(
-    120deg,
-    rgba(56,189,248,0.05),
-    rgba(56,189,248,0.05) 2px,
-    transparent 2px,
-    transparent 70px
-  );
+  background:
+    repeating-linear-gradient(
+      120deg,
+      rgba(139,92,246,0.08),
+      rgba(139,92,246,0.08) 2px,
+      transparent 2px,
+      transparent 90px
+    );
+  animation: drift 18s linear infinite;
   z-index: -1;
 }
 
+@keyframes drift {
+  from { background-position: 0 0; }
+  to { background-position: 1000px 600px; }
+}
+
+/* ================================
+   GLOBAL SECTION STYLING
+================================ */
 section {
   max-width: 1100px;
   margin: auto;
@@ -36,7 +66,9 @@ section {
   text-align: center;
 }
 
-/* HERO */
+/* ================================
+   HERO SECTION
+================================ */
 .hero {
   min-height: 100vh;
   display: flex;
@@ -45,71 +77,268 @@ section {
 }
 
 .logo {
-  max-width: 260px;
+  max-width: 280px;
   margin: 0 auto 1.5rem;
-  filter: drop-shadow(0 0 30px rgba(99,102,241,0.6));
+  filter:
+    drop-shadow(0 0 25px rgba(139,92,246,0.8))
+    drop-shadow(0 0 50px rgba(56,189,248,0.4));
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
 .tagline {
-  font-size: 1.8rem;
-  font-weight: bold;
+  font-size: 1.9rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
 }
 
 .subtitle {
   max-width: 600px;
   margin: 1.5rem auto 2.5rem;
-  color: #cbd5f5;
+  color: var(--text-muted);
+  line-height: 1.6;
 }
 
+/* ================================
+   CTA BUTTON
+================================ */
 .cta-btn {
-  background: #38bdf8;
-  color: #020617;
-  padding: 1rem 2.5rem;
+  background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+  color: var(--bg-dark);
+  padding: 1rem 2.7rem;
   border-radius: 40px;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  box-shadow:
+    0 0 20px rgba(56,189,248,0.6),
+    0 0 50px rgba(139,92,246,0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* PILLARS */
+.cta-btn:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow:
+    0 0 30px rgba(56,189,248,0.9),
+    0 0 70px rgba(139,92,246,0.6);
+}
+
+/* ================================
+   ABOUT (GLASS PANEL)
+================================ */
+.about {
+  background: rgba(2, 6, 23, 0.65);
+  backdrop-filter: blur(14px);
+  border-radius: 18px;
+  box-shadow: 0 0 40px rgba(139,92,246,0.15);
+}
+
+/* ================================
+   PILLARS
+================================ */
 .pillar-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1.5rem;
+  margin-top: 2.5rem;
 }
 
 .pillar {
-  background: #020617;
-  padding: 1.5rem;
-  border-radius: 14px;
+  background: linear-gradient(
+    160deg,
+    rgba(2,6,23,0.9),
+    rgba(15,23,42,0.9)
+  );
+  padding: 1.7rem;
+  border-radius: 16px;
   box-shadow:
-    0 0 20px rgba(56,189,248,0.08),
-    inset 0 0 25px rgba(99,102,241,0.05);
+    0 0 25px rgba(56,189,248,0.12),
+    inset 0 0 20px rgba(139,92,246,0.08);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.pillar:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 0 40px rgba(56,189,248,0.35),
+    0 0 80px rgba(139,92,246,0.25);
 }
 
 .pillar h3 {
-  color: #38bdf8;
-  margin-bottom: 0.5rem;
+  color: var(--neon-blue);
+  margin-bottom: 0.6rem;
 }
 
-/* SIGNUP */
+/* ================================
+   SIGNUP SECTION
+================================ */
 .signup input {
-  padding: 0.8rem;
-  border-radius: 8px;
+  padding: 0.85rem;
+  border-radius: 10px;
   border: none;
-  width: 250px;
+  width: 260px;
+  outline: none;
 }
 
 .signup button {
-  padding: 0.8rem 1.5rem;
+  padding: 0.85rem 1.7rem;
   margin-left: 0.5rem;
-  border-radius: 8px;
+  border-radius: 10px;
   border: none;
-  background: #38bdf8;
-  font-weight: bold;
+  background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+  font-weight: 700;
   cursor: pointer;
+  box-shadow: 0 0 15px rgba(56,189,248,0.5);
 }
 
+/* ================================
+   FOOTER
+================================ */
 footer {
   padding: 2rem;
-  color: #94a3b8;
+  color: var(--text-muted);
+}
+
+/* ================================
+   SCROLL REVEAL
+================================ */
+[data-animate] {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+[data-animate].visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* ================================
+   ANIMATED C5 LOGO BACKGROUND
+================================ */
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.logo-bg {
+  position: absolute;
+  inset: -20%;
+  background: url("assets/c5-logo.png") no-repeat center;
+  background-size: 700px;
+  opacity: 0.15;
+  filter:
+    blur(1px)
+    drop-shadow(0 0 60px rgba(139,92,246,0.6))
+    drop-shadow(0 0 120px rgba(56,189,248,0.4));
+  animation: logoDrift 22s linear infinite;
+  z-index: 0;
+}
+
+/* Foreground stays above */
+.hero > *:not(.logo-bg) {
+  position: relative;
+  z-index: 1;
+}
+
+/* Motion inspired by energy streaks */
+@keyframes logoDrift {
+  0% {
+    transform: translate(-30px, -20px) scale(1);
+  }
+  50% {
+    transform: translate(30px, 20px) scale(1.05);
+  }
+  100% {
+    transform: translate(-30px, -20px) scale(1);
+  }
+}
+.logo-bg {
+  animation:
+    logoDrift 22s linear infinite,
+    glowPulse 6s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    opacity: 0.12;
+  }
+  50% {
+    opacity: 0.22;
+  }
+}
+.pillar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  margin: 3rem auto 0;
+
+  /* CENTERING FIX */
+  justify-items: center;   /* centers cards within columns */
+  justify-content: center; /* centers the grid itself */
+  max-width: 1000px;       /* prevents over-stretching */
+}
+.pillar {
+  width: 100%;
+  max-width: 280px;
+  text-align: center;
+}
+/* ================================
+   SIGNUP CENTERING
+================================ */
+.signup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* ================================
+   COUNTDOWN TIMER
+================================ */
+.countdown {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.time-box {
+  background: linear-gradient(
+    160deg,
+    rgba(2,6,23,0.9),
+    rgba(15,23,42,0.9)
+  );
+  border-radius: 16px;
+  padding: 1.2rem 1.6rem;
+  min-width: 90px;
+  box-shadow:
+    0 0 25px rgba(56,189,248,0.25),
+    inset 0 0 20px rgba(139,92,246,0.15);
+}
+
+.time-box span {
+  display: block;
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--neon-blue);
+}
+
+.time-box small {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+/* ================================
+   FOOTER CENTERING
+================================ */
+footer {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-muted);
 }
