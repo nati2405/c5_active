@@ -29,7 +29,7 @@ if (form) {
     const email = document.getElementById("email").value;
 
     try {
-      const res = await fetch("http://nathanbez.com", {
+      const res = await fetch("/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email })
