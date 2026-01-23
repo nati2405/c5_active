@@ -97,8 +97,8 @@ if (form) {
     // This is where the emailJS fetch will go next!
     try {
   await emailjs.send(
-    "service_upd9bqr",
-    "template_76c0c2o",
+    "service_ji3cppf",
+    "template_05a7008",
     {
       firstName: fname,
       email: email
