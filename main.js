@@ -83,20 +83,42 @@ const message = document.getElementById("message");
 if (form) {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
+    
+     // Grabs values from inputs
     const fname = document.getElementById("fname").value;
     const lname = document.getElementById("lname").value;
     const email = document.getElementById("email").value;
 
+   // Shows sending state
     message.textContent = "Sending...";
     message.style.color = "#38bdf8";
 
     // This is where the Formspree fetch will go next!
-    console.log("Captured:", fname, lname, email);
-    
-    // Temporary success message
-    setTimeout(() => {
+     try {
+      const res = await fetch("https://formspree.io/f/xvzkqyev", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          firstName: fname,
+          lastName: lname,
+          email: email
+        })
+      });
+
+      if (res.ok) {
         message.textContent = `Thanks ${fname}, you're on the list!`;
+        message.style.color = "#38bdf8";
         form.reset();
-    }, 1000);
+      } else {
+        message.textContent = "Something went wrong. Please try again.";
+        message.style.color = "#f87171";
+      }
+    } catch (error) {
+      message.textContent = "Network error. Please try again later.";
+      message.style.color = "#f87171";
+    }
   });
 }
