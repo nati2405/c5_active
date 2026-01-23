@@ -86,40 +86,33 @@ if (form) {
          // Grabs values from inputs
     
      // Grabs values from inputs
-    const fname = document.getElementById("fname").value;
-    const lname = document.getElementById("lname").value;
-    const email = document.getElementById("email").value;
+    const fname = document.getElementById("fname").value.trim();
+    const lname = document.getElementById("lname").value.trim();
+    const email = document.getElementById("email").value.trim();
 
    // Shows sending state
     message.textContent = "Sending...";
     message.style.color = "#38bdf8";
 
-    // This is where the Formspree fetch will go next!
+    // This is where the emailJS fetch will go next!
     try {
-      const res = await fetch("https://formspree.io/f/xvzkqyev", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        },
-        body: JSON.stringify({
-          firstName: fname,
-          lastName: lname,
-          email: email
-        })
-      });
-
-      if (res.ok) {
-        message.textContent = `Thanks ${fname}, you're on the list!`;
-        message.style.color = "#38bdf8";
-        form.reset();
-      } else {
-        message.textContent = "Something went wrong. Please try again.";
-        message.style.color = "#f87171";
-      }
-    } catch (error) {
-      message.textContent = "Network error. Please try again later.";
-      message.style.color = "#f87171";
+  await emailjs.send(
+    "service_upd9bqr",
+    "template_76c0c2o",
+    {
+      firstName: fname,
+      email: email
     }
+  );
+
+  message.textContent = `Thanks ${fname}, you're on the list!`;
+  message.style.color = "#38bdf8";
+  form.reset();
+
+} catch (error) {
+  message.textContent = "Email failed. Please try again later.";
+  message.style.color = "#f87171";
+  console.error(error);
+}
   });
 }
