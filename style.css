@@ -74,6 +74,10 @@ section {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center; /* This forces all children to the middle */
+  text-align: center;
+  position: relative;
+  overflow: hidden;
 }
 
 .logo {
@@ -194,7 +198,63 @@ section {
   cursor: pointer;
   box-shadow: 0 0 15px rgba(56,189,248,0.5);
 }
+/* ... KEEP ALL YOUR EXISTING CSS UNTIL THE END ... */
 
+/* ADD ONLY THIS FOR THE POPUP */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.9);
+  backdrop-filter: blur(10px);
+  display: none; /* Hidden by default */
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.modal-content {
+  background: var(--bg-mid);
+  padding: 2.5rem;
+  border-radius: 20px;
+  border: 1px solid var(--neon-purple);
+  text-align: center;
+  position: relative;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 0 50px rgba(139, 92, 246, 0.3);
+}
+
+.modal-content input {
+  display: block;
+  width: 100%;
+  margin: 1rem 0;
+  padding: 0.85rem;
+  border-radius: 10px;
+  border: none;
+  background: var(--bg-dark);
+  color: white;
+  outline: none;
+}
+
+.modal-content button {
+  padding: 0.85rem 1.7rem;
+  width: 100%;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+  color: var(--bg-dark);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.close-modal {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: var(--text-muted);
+}
 /* ================================
    FOOTER
 ================================ */
@@ -227,7 +287,7 @@ footer {
 .logo-bg {
   position: absolute;
   inset: -20%;
-  background: url("assets/c5-logo.png") no-repeat center;
+  /*background: url("c5_logo.png") no-repeat center;*/
   background-size: 700px;
   opacity: 0.15;
   filter:
@@ -302,36 +362,54 @@ footer {
 ================================ */
 .countdown {
   display: flex;
-  gap: 1.5rem;
-  margin-bottom: 2.5rem;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;            /* Use rem for flexible spacing */
+  margin: 2rem auto;
+  width: 100%;
+  flex-wrap: wrap;      /* Allows boxes to wrap on tiny screens if needed */
+  padding: 0 10px;      /* Prevents touching the screen edge */
 }
 
 .time-box {
   background: linear-gradient(
     160deg,
-    rgba(2,6,23,0.9),
-    rgba(15,23,42,0.9)
+    rgba(2, 6, 23, 0.9),
+    rgba(15, 23, 42, 0.9)
   );
   border-radius: 16px;
-  padding: 1.2rem 1.6rem;
-  min-width: 90px;
+  padding: 1.2rem;
+  /* Use flex-basis for fluid sizing instead of fixed min-width */
+  flex: 0 1 100px;
+  min-width: 80px;      /* Keeps boxes from getting too squashed */
+  text-align: center;
   box-shadow:
-    0 0 25px rgba(56,189,248,0.25),
-    inset 0 0 20px rgba(139,92,246,0.15);
+    0 0 25px rgba(56, 189, 248, 0.25),
+    inset 0 0 20px rgba(139, 92, 246, 0.15);
 }
 
 .time-box span {
   display: block;
-  font-size: 2.2rem;
+  font-size: clamp(1.5rem, 4vw, 2.2rem); /* Dynamic font: shrinks on mobile */
   font-weight: 800;
   color: var(--neon-blue);
 }
 
 .time-box small {
-  font-size: 0.75rem;
-  letter-spacing: 0.15em;
+  font-size: clamp(0.6rem, 2vw, 0.75rem); /* Dynamic font for labels */
+  letter-spacing: 0.1em;
   color: var(--text-muted);
   text-transform: uppercase;
+}
+
+@media (max-width: 400px) {
+  .countdown {
+    gap: 0.5rem;
+  }
+  .time-box {
+    min-width: 70px;
+    padding: 0.8rem 0.4rem;
+  }
 }
 
 /* ================================
@@ -341,4 +419,48 @@ footer {
   text-align: center;
   padding: 2rem;
   color: var(--text-muted);
+}
+
+/* Container for the pillars - ensure they are aligned */
+.pillar-grid {
+  display: flex;
+  flex-wrap: wrap; /* Allows pillars to stack on mobile */
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.pillar {
+  flex: 1;
+  min-width: 200px; /* Prevents them from getting too squashed */
+  max-width: 300px; /* Keeps them from getting too wide on desktop */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* The magic for the images */
+/* The magic for the images */
+.pillar-icon {
+  /* Fix: Set a constant height so all icons look the same size */
+  height: 80px;            /* This ensures the 'line' where text starts is even */
+  width: auto;             /* Keeps the icon from stretching */
+  
+  /* Responsive: ensures they don't overflow on tiny screens */
+  max-width: 100%; 
+  
+  /* Blending & Aesthetics */
+  margin-bottom: 1rem;
+  mix-blend-mode: screen;  /* Removes the black box background */
+  filter: brightness(1.1); /* Makes the neon pop */
+  
+  /* Smooth scaling when resizing window */
+  transition: transform 0.3s ease;
+}
+
+/* Optional: Subtle hover effect to make it feel interactive */
+.pillar:hover .pillar-icon {
+  transform: scale(1.1);
+  filter: brightness(1.3) drop-shadow(0 0 10px rgba(0, 212, 255, 0.5));
 }

@@ -2,30 +2,39 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   <title>C5 Active</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- HERO -->
-  <section class="hero" data-animate>
-    <!-- Animated background logo -->
+  <section class="full-page hero" data-animate>
     <div class="logo-bg"></div>
-
-    <img src="c5_logo.png" alt="C5 Active Logo" class="logo" />
-
+    <img src="images/c5_logo.png" alt="C5 Active Logo" class="logo" />
     <p class="tagline">Connect. Commit. Change.</p>
 
-    <p class="subtitle">
-      C5 Active is a fitness platform built around habits, consistency,
-      and showing up together.
-    </p>
+    <div class="countdown">
+        <div class="time-box">
+            <span id="days">30</span>
+            <small>Days</small>
+        </div>
+        <div class="time-box">
+            <span id="hours">00</span>
+            <small>Hours</small>
+        </div>
+        <div class="time-box">
+            <span id="minutes">00</span>
+            <small>Min</small>
+        </div>
+        <div class="time-box">
+            <span id="seconds">00</span>
+            <small>Sec</small>
+        </div>
+    </div>
 
-    <a href="#signup" class="cta-btn">Join the Beta</a>
+    <p class="subtitle">C5 Active is a fitness platform built around habits, consistency, and showing up together.</p>
   </section>
 
-  <!-- ABOUT -->
   <section class="about" data-animate>
     <h2>What is C5 Active?</h2>
     <p>
@@ -35,71 +44,58 @@
     </p>
   </section>
 
-  <!-- C5 PILLARS -->
   <section class="pillars" data-animate>
     <h2>The C5 Method</h2>
-
     <div class="pillar-grid">
-      <div class="pillar">
+    
+     <div class="pillar">
+        <img src="images/connect.png" alt="Connect Icon" class="pillar-icon">
         <h3>Connect</h3>
         <p>Find people near you who want to stay active.</p>
       </div>
 
       <div class="pillar">
+        <img src="images/commit.png" alt="Commit Icon" class="pillar-icon">
         <h3>Commit</h3>
-        <p>Show up together and stay accountable.</p>
+        <p>Show up together and stay accountability.</p>
       </div>
 
       <div class="pillar">
+        <img src="images/consistency.png" alt="Consistency Icon" class="pillar-icon">
         <h3>Consistency</h3>
         <p>Build habits that last.</p>
       </div>
 
       <div class="pillar">
+        <img src="images/confidence.png" alt="Confidence Icon" class="pillar-icon">
         <h3>Confidence</h3>
         <p>Grow stronger with support.</p>
       </div>
 
       <div class="pillar">
+        <img src="images/change.png" alt="Change Icon" class="pillar-icon">
         <h3>Change</h3>
         <p>See real, visible progress.</p>
       </div>
+
     </div>
   </section>
 
-  <!-- SIGNUP -->
-  <section class="signup" id="signup" data-animate>
-
-    <!-- Countdown -->
-    <div class="countdown">
-      <div class="time-box">
-        <span id="days">30</span>
-        <small>Days</small>
-      </div>
-      <div class="time-box">
-        <span id="hours">00</span>
-        <small>Hours</small>
-      </div>
-      <div class="time-box">
-        <span id="minutes">00</span>
-        <small>Min</small>
-      </div>
-      <div class="time-box">
-        <span id="seconds">00</span>
-        <small>Sec</small>
-      </div>
+  <div id="signup-modal" class="modal-overlay">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2>Join the Waitlist</h2>
+      <p>Be the first to know when we launch!</p>
+      <form id="signup-form">
+        <input type="text" id="fname" placeholder="First Name" required />
+        <input type="text" id="lname" placeholder="Last Name" required />
+        <input type="email" id="email" placeholder="Enter your email" required />
+        <button type="submit">Notify Me</button>
+      </form>
+      <p id="message"></p>
     </div>
-
-    <h2>Get Early Access</h2>
-
-    <form id="signup-form">
-      <input type="email" id="email" placeholder="Enter your email" required />
-      <button type="submit">Notify Me</button>
-    </form>
-
-    <p id="message"></p>
-  </section>
-
+  </div>
+  <center><a href="#signup" class="cta-btn">Join the Beta</a></center>
   <footer>
     © 2026 C5 Active
   </footer>
