@@ -84,6 +84,8 @@ if (form) {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
          // Grabs values from inputs
+    
+     // Grabs values from inputs
     const fname = document.getElementById("fname").value;
     const lname = document.getElementById("lname").value;
     const email = document.getElementById("email").value;
@@ -111,13 +113,6 @@ if (form) {
         message.textContent = `Thanks ${fname}, you're on the list!`;
         message.style.color = "#38bdf8";
         form.reset();
-      } else {
-        message.textContent = "Something went wrong. Please try again.";
-        message.style.color = "#f87171";
-      }
-    } catch (error) {
-        message.textContent = "Network error. Please try again later.";
-        message.style.color = "#f87171";
-      }
+    }, 1000);
   });
 }
