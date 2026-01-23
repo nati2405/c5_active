@@ -13,6 +13,18 @@ document.querySelectorAll("[data-animate]").forEach(el => {
   observer.observe(el);
 });
 
+function scrollToLearnMore() {
+  const aboutSection = document.querySelector(".about");
+
+  if (aboutSection) {
+    aboutSection.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  }
+}
+
+
 /* ================================
    MODAL LOGIC
 ================================ */
