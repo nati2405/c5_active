@@ -95,7 +95,7 @@ if (form) {
     message.style.color = "#38bdf8";
 
     // This is where the Formspree fetch will go next!
-     try {
+    try {
       const res = await fetch("https://formspree.io/f/xvzkqyev", {
         method: "POST",
         headers: {
@@ -113,6 +113,13 @@ if (form) {
         message.textContent = `Thanks ${fname}, you're on the list!`;
         message.style.color = "#38bdf8";
         form.reset();
-    }, 1000);
+      } else {
+        message.textContent = "Something went wrong. Please try again.";
+        message.style.color = "#f87171";
+      }
+    } catch (error) {
+      message.textContent = "Network error. Please try again later.";
+      message.style.color = "#f87171";
+    }
   });
 }
